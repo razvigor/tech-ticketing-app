@@ -11,7 +11,7 @@ const MainNavLinks = () => {
     ]
     const currentPath = usePathname()
     return (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-4'>
             {links.map((link) => (
                 <Link href={link.href} key={link.label} className={`navbar-link${currentPath === link.href ? ' cursor-default text-primary hover:text-primary/70' : ''}`}>
                     {link.label}

@@ -79,6 +79,6 @@ body {
 }
 @layer components {
   .navbar-link {
-    @apply font-bold uppercase text-base text-muted-foreground transition-colors hover:text-primary;
+    @apply font-bold uppercase text-sm text-muted-foreground transition-colors hover:text-primary;
   }
 }
