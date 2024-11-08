@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { ticketShema } from "@/ValidationSchemas/ticket"
+import { ticketSchema } from "@/ValidationSchemas/ticket"
 import { Form, FormField, FormItem, FormLabel, FormControl } from "./ui/form"
 import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"
@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-type TicketFormData = z.infer<typeof ticketShema>
+type TicketFormData = z.infer<typeof ticketSchema>
 
 interface Props {
     ticket?: Ticket;
@@ -26,11 +26,10 @@ const TicketForm = ({ ticket }: Props) => {
     const router = useRouter();
 
     const form = useForm<TicketFormData>({
-        resolver: zodResolver(ticketShema),
+        resolver: zodResolver(ticketSchema),
     });
 
-    async function onSubmit(values: z.infer<typeof ticketShema>) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof ticketSchema>) {
         try {
             setIsSubmitting(true);
             setError("");
@@ -44,8 +43,7 @@ const TicketForm = ({ ticket }: Props) => {
             router.push("/tickets");
             router.refresh();
         } catch (error) {
-            console.log(error);
-            setError("Unknown Error Occured.");
+            setError("Unknown Error Occured." + " " + error?.response.data.error);
             setIsSubmitting(false);
         }
     }

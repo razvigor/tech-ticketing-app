@@ -17,7 +17,7 @@ const MainNav = async () => {
                     <Image src={LogoDark} width={156} alt='Ticket Application' className='hidden dark:block' quality={75} priority />
                 </Link>
             </div>
-            <MainNavLinks />
+            <MainNavLinks role={session?.user.role} />
             <div className='flex items-center gap-2'>
                 {session ? (
                     <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>

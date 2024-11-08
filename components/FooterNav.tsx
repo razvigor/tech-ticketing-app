@@ -2,16 +2,16 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const FooterNav = () => {
+const FooterNav = ({ role }: { role?: string }) => {
     const links = [
-        { href: '/', label: 'Dashboard' },
-        { href: '/users', label: 'Users' },
-        { href: '/tickets', label: 'Tickets' },
+        { href: '/', label: 'Dashboard', adminOnly: false },
+        { href: '/users', label: 'Users', adminOnly: true },
+        { href: '/tickets', label: 'Tickets', adminOnly: false }, ,
     ]
     const currentPath = usePathname()
     return (
         <>
-            {links.map((link) => (
+            {links.filter(link => !link.adminOnly || role === "ADMIN").map((link) => (
                 <li key={link.label}>
                     <Link href={link.href} className={`${currentPath === link.href ? ' cursor-default text-primary hover:text-primary/70' : ''}`}>
                         {link.label}

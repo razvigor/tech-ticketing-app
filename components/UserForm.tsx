@@ -28,7 +28,6 @@ const UserForm = ({ user }: Props) => {
     });
 
     async function onSubmit(values: z.infer<typeof userSchema>) {
-        console.log(values)
         try {
             setIsSubmitting(true);
             setError("");
@@ -43,7 +42,7 @@ const UserForm = ({ user }: Props) => {
             router.refresh();
         } catch (error) {
             console.log(error);
-            setError("Unknown Error Occured.");
+            setError("Unknown Error Occured." + " " + error?.response.data.error);
             setIsSubmitting(false);
         }
     }
