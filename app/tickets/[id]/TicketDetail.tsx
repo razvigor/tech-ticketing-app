@@ -2,15 +2,17 @@ import TicketPriority from '@/components/TicketPriority'
 import TicketStatusBadge from '@/components/TicketStatusBadge'
 import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Ticket } from '@prisma/client'
+import { Ticket, User } from '@prisma/client'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import DeliteButton from './DeliteButton'
+import AssignTicket from '@/components/AssignTicket'
 
 interface Props {
     ticket: Ticket
+    users: User[]
 }
-const TicketDetail = ({ ticket }: Props) => {
+const TicketDetail = ({ ticket, users }: Props) => {
     return (
         <>
             <Card>
@@ -46,6 +48,7 @@ const TicketDetail = ({ ticket }: Props) => {
                 </CardFooter>
             </Card>
             <div className='flex gap-x-3 mt-4'>
+                <AssignTicket ticket={ticket} users={users} />
                 <Link href={`/tickets/edit/${ticket.id}`} className={`${buttonVariants({
                     variant: "default",
                     size: "sm",

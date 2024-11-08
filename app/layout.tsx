@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import MainNav from "@/components/MainNav";
 import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "@/components/Footer";
+
 
 const lato = localFont({
   src: [
@@ -48,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sr">
+    <html lang="en">
       <body
         className={`${lato.variable} antialiased`}
       >
@@ -67,6 +69,7 @@ export default function RootLayout({
               {children}
             </div>
           </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

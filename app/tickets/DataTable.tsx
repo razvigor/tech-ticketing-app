@@ -2,27 +2,29 @@ import TicketPriority from '@/components/TicketPriority'
 import TicketStatusBadge from '@/components/TicketStatusBadge'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Ticket } from '@prisma/client'
-import { DeleteIcon, Pen } from 'lucide-react'
+import { ArrowDown, Pen } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { buttonVariants } from '@/components/ui/button'
 import DeliteButton from './[id]/DeliteButton'
+import { SearchParams } from './page'
 
 interface Props {
     tickets: Ticket[]
+    searchParams: SearchParams
 }
 
-const DataTable = ({ tickets }: Props) => {
+const DataTable = ({ tickets, searchParams }: Props) => {
     return (
         <div className='w-full mt-5'>
             <div className='rounded-md sm:border'>
                 <Table>
                     <TableHeader>
-                        <TableRow>
-                            <TableHead>Title</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Priority</TableHead>
-                            <TableHead>Created At</TableHead>
+                        <TableRow className='bg-secondary hover:bg-secondary'>
+                            <TableHead><Link href={{ query: { ...searchParams, orderBy: 'title' } }}>Title</Link>{"title" === searchParams?.orderBy && (<ArrowDown className='inline p-1' />)}</TableHead>
+                            <TableHead><Link href={{ query: { ...searchParams, orderBy: 'status' } }}>Status</Link>{'status' === searchParams?.orderBy && (<ArrowDown className='inline p-1' />)}</TableHead>
+                            <TableHead><Link href={{ query: { ...searchParams, orderBy: 'priority' } }}>Priority</Link>{'priority' === searchParams?.orderBy && (<ArrowDown className='inline p-1' />)}</TableHead>
+                            <TableHead><Link href={{ query: { ...searchParams, orderBy: 'createdAt' } }}>Created At</Link>{'createdAt' === searchParams?.orderBy && (<ArrowDown className='inline p-1' />)}</TableHead>
                             <TableHead className='text-center'>Edit / Delite</TableHead>
                         </TableRow>
                     </TableHeader>
